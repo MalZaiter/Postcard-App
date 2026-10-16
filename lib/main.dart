@@ -1,80 +1,77 @@
 import 'package:flutter/material.dart';
 
+import 'screens/start_screen.dart';
+
 void main() {
   runApp(const PostcardApp());
 }
 
-class PostcardApp extends StatelessWidget {
+final List<Map<String, String>> destinations = [
+  {'name': 'Tokyo, Japan', 'category': 'City break'},
+  {'name': 'Bali, Indonesia', 'category': 'Beach getaway'},
+  {'name': 'Paris, France', 'category': 'Culture & romance'},
+  {'name': 'Interlaken, Switzerland', 'category': 'Nature & adventure'},
+  {'name': 'Cairo, Egypt', 'category': 'History & culture'},
+];
+
+class PostcardApp extends StatefulWidget {
   const PostcardApp({super.key});
 
   @override
-  Widget build(BuildContext context) {
-    return MaterialApp(debugShowCheckedModeBanner: false, home: StartScreen());
-  }
+  State<PostcardApp> createState() => _PostcardAppState();
 }
 
-class StartScreen extends StatelessWidget {
-  const StartScreen({super.key});
+class _PostcardAppState extends State<PostcardApp> {
+  ThemeMode _themeMode = ThemeMode.light;
+
+  void _toggleTheme() {
+    setState(() {
+      _themeMode = _themeMode == ThemeMode.light
+          ? ThemeMode.dark
+          : ThemeMode.light;
+    });
+  }
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      backgroundColor: const Color(0xFF141E46),
-      body: Center(
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            // circular badge for logo
-            const CircleAvatar(
-              radius: 45,
-              backgroundColor: Color(0xFFFFF5E0),
-              child: Icon(
-                Icons.location_pin,
-                size: 48,
-                color: Color(0xFF141E46),
-              ),
-            ),
+    return MaterialApp(
+      debugShowCheckedModeBanner: false,
 
-            const SizedBox(height: 24),
-
-            // app name
-            const Text(
-              'Postcard',
-              style: TextStyle(
-                fontSize: 32,
-                fontWeight: FontWeight.bold,
-                color: Color(0xFFFFF5E0),
-              ),
-            ),
-
-            const SizedBox(height: 8),
-
-            // tagline
-            const Text(
-              'Save your memories!',
-              style: TextStyle(fontSize: 16, color: Color(0xFFFFF5E0)),
-            ),
-
-            const SizedBox(height: 32),
-
-            // button: functionality will be added later
-            ElevatedButton(
-              onPressed: () {},
-              style: ElevatedButton.styleFrom(
-                backgroundColor: const Color(0xFF790D16),
-                padding: const EdgeInsets.symmetric(
-                  horizontal: 32,
-                  vertical: 12,
-                ),
-                shape: RoundedRectangleBorder(
-                  borderRadius: BorderRadius.circular(8),
-                ),
-              ),
-              child: const Text('Get Started'),
-            ),
-          ],
+      theme: ThemeData(
+        brightness: Brightness.light,
+        scaffoldBackgroundColor: const Color(0xFFFFF5E0),
+        colorScheme: ColorScheme.light(
+          primary: const Color(0xFF790D16), // Burgundy
+          onPrimary: const Color(0xFFFFF5E0), // Cream text on burgundy
+          surface: const Color(0xFFFFF5E0),
+          onSurface: const Color(0xFF141E46), // Navy text on cream
         ),
       ),
+
+      darkTheme: ThemeData(
+        brightness: Brightness.dark,
+        scaffoldBackgroundColor: const Color(0xFF141E46),
+        colorScheme: ColorScheme.dark(
+          primary: const Color(0xFF790D16), // Burgundy buttons
+          onPrimary: const Color(0xFFFFF5E0), // Cream text on burgundy
+          surface: const Color(0xFF141E46),
+          onSurface: const Color(0xFFFFF5E0), // Cream text on navy
+        ),
+
+        appBarTheme: const AppBarTheme(
+          backgroundColor: Color(0xFF790D16), // Burgundy
+          foregroundColor: Color(0xFFFFF5E0), // Cream text on burgundy
+        ),
+
+        cardTheme: const CardThemeData(
+          color: Color(0xFF1E2A5C), // Darker navy for cards
+          shadowColor: Colors.black54,
+        ),
+      ),
+
+      themeMode: _themeMode,
+
+      home: StartScreen(onToggleTheme: _toggleTheme),
     );
   }
 }
