@@ -1,5 +1,6 @@
 import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
+
 import '../widgets/flag_image.dart';
 import '../models/destination.dart';
 
@@ -82,10 +83,7 @@ class _DestinationScreenState extends State<DestinationScreen> {
                       horizontal: 16,
                       vertical: 12,
                     ),
-                    leading: FlagImage(
-                      url: destination.flagUrl,
-                      width: 50,
-                    ),
+                    leading: FlagImage(url: destination.flagUrl, width: 50),
                     title: Text(
                       destination.name,
                       style: theme.textTheme.titleMedium?.copyWith(
