@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 
 import 'sign_up_screen.dart';
 
-import 'package:go_router/go_router.dart';
+
 
 class StartScreen extends StatelessWidget {
   final VoidCallback onToggleTheme;
