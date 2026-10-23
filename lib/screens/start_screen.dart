@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 
-import 'destination_screen.dart';
+import 'sign_up_screen.dart';
+
+import 'package:go_router/go_router.dart';
 
 class StartScreen extends StatelessWidget {
   final VoidCallback onToggleTheme;
@@ -56,9 +58,7 @@ class StartScreen extends StatelessWidget {
               onPressed: () {
                 Navigator.push(
                   context,
-                  MaterialPageRoute(
-                    builder: (context) => const DestinationScreen(),
-                  ),
+                  MaterialPageRoute(builder: (context) => const SignUpScreen()),
                 );
               },
               style: ElevatedButton.styleFrom(
