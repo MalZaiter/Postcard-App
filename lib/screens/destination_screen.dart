@@ -1,6 +1,6 @@
 import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
-
+import '../widgets/flag_image.dart';
 import '../models/destination.dart';
 
 class DestinationScreen extends StatefulWidget {
@@ -82,12 +82,9 @@ class _DestinationScreenState extends State<DestinationScreen> {
                       horizontal: 16,
                       vertical: 12,
                     ),
-                    leading: CircleAvatar(
-                      radius: 27,
-                      backgroundColor: theme.colorScheme.primary.withValues(
-                        alpha: 0.1,
-                      ),
-                      child: const Icon(Icons.flight_takeoff),
+                    leading: FlagImage(
+                      url: destination.flagUrl,
+                      width: 50,
                     ),
                     title: Text(
                       destination.name,
