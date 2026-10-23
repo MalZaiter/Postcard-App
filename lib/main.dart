@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
 
 import 'screens/start_screen.dart';
+import 'screens/destination_screen.dart';
 
 void main() {
   runApp(const PostcardApp());
@@ -32,9 +34,24 @@ class _PostcardAppState extends State<PostcardApp> {
     });
   }
 
+  late final GoRouter _router = GoRouter(
+    routes: [
+      GoRoute(
+        path: '/',
+        builder: (context, state) =>
+            StartScreen(onToggleTheme: _toggleTheme),
+      ),
+      GoRoute(
+        path: '/destinations',
+        builder: (context, state) => const DestinationScreen(),
+      ),
+    ],
+  );
+
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
+    return MaterialApp.router(
+      routerConfig: _router,
       debugShowCheckedModeBanner: false,
 
       theme: ThemeData(
@@ -71,7 +88,6 @@ class _PostcardAppState extends State<PostcardApp> {
 
       themeMode: _themeMode,
 
-      home: StartScreen(onToggleTheme: _toggleTheme),
     );
   }
 }
