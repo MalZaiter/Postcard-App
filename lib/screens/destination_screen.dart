@@ -4,6 +4,8 @@ import 'package:flutter/material.dart';
 import '../widgets/flag_image.dart';
 import '../models/destination.dart';
 
+import 'package:go_router/go_router.dart';
+
 class DestinationScreen extends StatefulWidget {
   const DestinationScreen({super.key});
 
@@ -83,6 +85,11 @@ class _DestinationScreenState extends State<DestinationScreen> {
                       horizontal: 16,
                       vertical: 12,
                     ),
+                    onTap: () {
+                      context.push(
+                        '/country/${Uri.encodeComponent(destination.name)}',
+                      );
+                    },
                     leading: FlagImage(url: destination.flagUrl, width: 50),
                     title: Text(
                       destination.name,

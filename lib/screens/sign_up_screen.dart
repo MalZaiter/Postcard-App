@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
-import 'welcome_screen.dart';
+import 'package:go_router/go_router.dart';
+
 import '../validators.dart';
 
 class SignUpScreen extends StatefulWidget {
@@ -63,13 +64,8 @@ class _SignUpScreenState extends State<SignUpScreen> {
               ElevatedButton(
                 onPressed: () {
                   if (_formKey.currentState!.validate()) {
-                    Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                        builder: (context) =>
-                            WelcomeScreen(name: _nameController.text),
-                      ),
-                    );
+                    final name = _nameController.text.trim();
+                    context.push('/welcome/${Uri.encodeComponent(name)}');
                   }
                 },
                 child: const Text('Continue'),

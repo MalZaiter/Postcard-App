@@ -3,6 +3,9 @@ import 'package:go_router/go_router.dart';
 
 import 'screens/start_screen.dart';
 import 'screens/destination_screen.dart';
+import 'screens/welcome_screen.dart';
+import 'screens/sign_up_screen.dart';
+import 'screens/country_web_screen.dart';
 
 void main() {
   runApp(const PostcardApp());
@@ -38,12 +41,30 @@ class _PostcardAppState extends State<PostcardApp> {
     routes: [
       GoRoute(
         path: '/',
-        builder: (context, state) =>
-            StartScreen(onToggleTheme: _toggleTheme),
+        builder: (context, state) => StartScreen(onToggleTheme: _toggleTheme),
+      ),
+      GoRoute(
+        path: '/signup',
+        builder: (context, state) => const SignUpScreen(),
+      ),
+      GoRoute(
+        path: '/welcome/:name',
+        builder: (context, state) {
+          final name = state.pathParameters['name']!;
+          return WelcomeScreen(name: name);
+        },
       ),
       GoRoute(
         path: '/destinations',
         builder: (context, state) => const DestinationScreen(),
+      ),
+      GoRoute(
+        path: '/country/:country',
+        builder: (context, state) {
+          final country = state.pathParameters['country']!;
+
+          return CountryWebScreen(country: country);
+        },
       ),
     ],
   );
@@ -87,7 +108,6 @@ class _PostcardAppState extends State<PostcardApp> {
       ),
 
       themeMode: _themeMode,
-
     );
   }
 }

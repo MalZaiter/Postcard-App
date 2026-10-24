@@ -1,14 +1,10 @@
-
 import 'package:flutter/material.dart';
-import 'destination_screen.dart';
+import 'package:go_router/go_router.dart';
 
 class WelcomeScreen extends StatelessWidget {
   final String name;
 
-  const WelcomeScreen({
-    super.key,
-    required this.name,
-  });
+  const WelcomeScreen({super.key, required this.name});
 
   @override
   Widget build(BuildContext context) {
@@ -19,10 +15,7 @@ class WelcomeScreen extends StatelessWidget {
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
-              const Icon(
-                Icons.flight_takeoff,
-                size: 80,
-              ),
+              const Icon(Icons.flight_takeoff, size: 80),
               const SizedBox(height: 24),
               Text(
                 'Welcome, $name!',
@@ -40,12 +33,7 @@ class WelcomeScreen extends StatelessWidget {
               const SizedBox(height: 32),
               ElevatedButton(
                 onPressed: () {
-                  Navigator.push(
-                    context,
-                    MaterialPageRoute(
-                      builder: (context) => const DestinationScreen(),
-                    ),
-                  );
+                  context.push('/destinations');
                 },
                 child: const Text('Browse Destinations'),
               ),
